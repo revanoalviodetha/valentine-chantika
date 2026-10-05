@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Chantika Meikeysa Alfazari</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================
+   GLOBAL
+===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: radial-gradient(circle at 50% 0%, rgba(154, 119, 47, .12), transparent 35%), #080706;
+    color: #f5ead2;
+    font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: #c9a24d;
+    color: #080706;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #d7b45a;
+    border-radius: 50%;
+    opacity: .45;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    from { transform: translateY(110vh); opacity: 0; }
+    15% { opacity: .5; }
+    85% { opacity: .5; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* =====================================================
+   LETTER GATE
+===================================================== */
+#letterGate {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(143, 24, 40, .12), transparent 35%), #070605;
+    transition: opacity 1s ease, visibility 1s ease;
+    overflow: hidden; /* Mencegah elemen keluar dari viewport gate */
+}
+
+#letterGate.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* small text */
+.opening-text {
+    position: absolute;
+    top: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: rgba(238, 211, 148, .65);
+    animation: fadeDown 1.5s ease forwards;
+}
+
+.opening-title {
+    position: absolute;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(34px, 6vw, 70px);
+    font-weight: 500;
+    color: #f6e6c1;
+}
+
+.opening-title span {
+    display: block;
+    font-family: "Great Vibes", cursive;
+    color: #d8b45b;
+    font-size: .75em;
+    margin-top: -10px;
+}
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+.envelope-wrapper {
+    position: relative;
+    width: min(400px, 85vw);
+    aspect-ratio: 1.5;
+    perspective: 1200px;
+    cursor: pointer;
+    margin-top: 100px; /* Jarak aman dari teks judul atas agar tidak menabrak */
+    animation: envelopeEntrance 1.5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes envelopeEntrance {
+    from { opacity: 0; transform: translateY(40px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.envelope {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.65)) drop-shadow(0 0 25px rgba(191,145,48,.08));
+    transition: transform 1s ease;
+}
+
+/* envelope body */
+.envelope-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1b0809, #3a1115 50%, #170607);
+    border: 1px solid rgba(213,171,79,.5);
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), inset 0 0 60px rgba(0,0,0,.45);
+}
+
+/* paper inside */
+.inner-letter {
+    position: absolute;
+    width: 86%;
+    height: 90%;
+    left: 7%;
+    bottom: 3%;
+    background: linear-gradient(135deg, #fffaf0, #eee0c4);
+    color: #271b12;
+    z-index: 2;
+    border-radius: 4px;
+    padding: 15px;
+    transform: translateY(0) translateZ(5px);
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1), box-shadow 1s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    overflow: hidden; /* Mencegah teks meluap keluar kertas */
+}
+
+/* letter lines */
+.inner-letter::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(133,98,42,.25);
+}
+
+/* envelope flap */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    background: linear-gradient(145deg, #49151b, #21080a);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    z-index: 5;
+    border-top: 1px solid rgba(230,192,100,.4);
+    transition: transform 1.25s cubic-bezier(.2,.8,.2,1);
+}
+
+/* envelope bottom folds */
+.envelope-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    height: 70%;
+    background: linear-gradient(135deg, #24090b, #461318);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    z-index: 4;
+}
+
+.envelope-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 70%;
+    background: linear-gradient(225deg, #24090b, #461318);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    z-index: 4;
+}
+
+/* =====================================================
+   WAX SEAL
+===================================================== */
+.seal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) translateZ(20px);
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 35% 30%, #d5a74a, #93651d 55%, #4e310e);
+    border: 2px solid #e6c66f;
+    box-shadow: 0 7px 20px rgba(0,0,0,.5), inset 0 0 10px rgba(255,255,255,.25);
+    transition: transform .7s ease, opacity .5s ease;
+}
+
+.seal::before {
+    content: "C";
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff1c9;
+    text-shadow: 0 2px 3px rgba(0,0,0,.35);
+}
+
+/* hover */
+.envelope-wrapper:hover .envelope {
+    transform: translateY(-8px);
+}
+
+.envelope-wrapper:hover .seal {
+    box-shadow: 0 10px 30px rgba(0,0,0,.6), 0 0 30px rgba(211,167,70,.2), inset 0 0 10px rgba(255,255,255,.3);
+}
+
+/* label */
+.envelope-label {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(245,221,165,.55);
+    transition: opacity .5s ease;
+}
+
+/* =====================================================
+   OPEN ANIMATION
+===================================================== */
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1; /* Flap turun agar tidak menutupi kertas */
+}
+
+.envelope.open .inner-letter {
+    transform: translateY(-35%) translateZ(20px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.45);
+    z-index: 6; /* Kertas naik agar tidak tertutup lipatan amplop */
+}
+
+.envelope.open .seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.4) rotate(20deg);
+}
+
+.envelope.open {
+    transform: translateY(10px);
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+#mainContent {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+#mainContent.unlocked {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(5,4,3,.92), rgba(5,4,3,0));
+    backdrop-filter: blur(3px);
+}
+
+.logo {
+    font-family: "Great Vibes", cursive;
+    font-size: 28px;
+    color: #d7b65e;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,232,204,.65);
+}
+
+.nav-links a {
+    transition: .3s ease;
+}
+
+.nav-links a:hover {
+    color: #e5c66f;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 25px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(126,25,42,.16), transparent 65%);
+    filter: blur(10px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1000px;
+}
+
+.eyebrow {
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: #c7a453;
+    font-size: 10px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(55px, 10vw, 135px);
+    font-weight: 400;
+    line-height: .85;
+    color: #f4e8cd;
+    text-shadow: 0 10px 40px rgba(0,0,0,.5);
+}
+
+.hero h1 span {
+    display: block;
+    font-family: "Great Vibes", cursive;
+    color: #d5ae51;
+    font-size: .65em;
+    margin-top: 10px;
+}
+
+.hero-description {
+    max-width: 650px;
+    margin: 45px auto 0;
+    color: rgba(241,225,194,.65);
+    font-size: 14px;
+    line-height: 2;
+}
+
+.hero-line {
+    width: 80px;
+    height: 1px;
+    background: #c9a34f;
+    margin: 35px auto;
+}
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+.section {
+    padding: 130px 7%;
+    position: relative;
+}
+
+.section-inner {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-label {
+    color: #c8a34e;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(42px, 6vw, 75px);
+    font-weight: 400;
+    color: #f3e5c5;
+    margin-bottom: 45px;
+}
+
+/* =====================================================
+   LETTER
+===================================================== */
+.letter-section {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #080706, #11090a, #080706);
+}
+
+.letter-paper {
+    max-width: 900px;
+    margin: auto;
+    padding: clamp(25px, 6vw, 75px);
+    background: linear-gradient(135deg, #fffaf0, #e9dbc0);
+    color: #241b15;
+    position: relative;
+    box-shadow: 0 35px 90px rgba(0,0,0,.5);
+    border: 1px solid rgba(211,171,84,.35);
+    overflow: hidden; /* Menjaga dekorasi di dalam batas */
+}
+
+.letter-paper::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(118,85,34,.25);
+    pointer-events: none;
+}
+
+.letter-content {
+    position: relative;
+    z-index: 2;
+}
+
+.letter-date {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #806437;
+    margin-bottom: 45px;
+}
+
+.letter-greeting {
+    font-family: "Great Vibes", cursive;
+    font-size: 45px;
+    color: #721c28;
+    margin-bottom: 35px;
+}
+
+.letter-content p {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #33271e;
+    word-wrap: break-word; /* Mencegah teks menabrak sisi */
+}
+
+.letter-highlight {
+    font-family: "Great Vibes", cursive !important;
+    font-size: 38px !important;
+    text-align: center;
+    color: #8b2330 !important;
+    margin: 50px 0 !important;
+}
+
+.signature {
+    margin-top: 55px;
+    text-align: right;
+}
+
+.signature-small {
+    font-family: "Cormorant Garamond", serif;
+    color: #6b5540;
+    font-size: 17px;
+}
+
+.signature-name {
+    font-family: "Great Vibes", cursive;
+    font-size: 42px;
+    color: #721c28;
+    margin-top: 5px;
+}
+
+/* letter reveal */
+.letter-text {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.letter-section.visible .letter-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.letter-section.visible .letter-text:nth-child(2) { transition-delay: .2s; }
+.letter-section.visible .letter-text:nth-child(3) { transition-delay: .4s; }
+.letter-section.visible .letter-text:nth-child(4) { transition-delay: .6s; }
+.letter-section.visible .letter-text:nth-child(5) { transition-delay: .8s; }
+.letter-section.visible .letter-text:nth-child(6) { transition-delay: 1s; }
+
+/* =====================================================
+   STORY
+===================================================== */
+.story {
+    background: radial-gradient(circle at center, rgba(115,24,39,.13), transparent 55%);
+}
+
+.timeline {
+    position: relative;
+    max-width: 850px;
+    margin: 70px auto 0;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(transparent, #b28c3d, transparent);
+}
+
+.story-item {
+    width: 50%;
+    padding: 0 45px 80px;
+    position: relative;
+}
+
+.story-item:nth-child(even) { margin-left: 50%; }
+
+.story-dot {
+    position: absolute;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #c7a34d;
+    box-shadow: 0 0 0 5px rgba(199,163,77,.1), 0 0 20px rgba(199,163,77,.2);
+}
+
+.story-item:nth-child(odd) .story-dot { right: -6px; }
+.story-item:nth-child(even) .story-dot { left: -6px; }
+
+.story-number {
+    font-family: "Great Vibes", cursive;
+    color: #d0aa50;
+    font-size: 35px;
+}
+
+.story-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 31px;
+    margin: 10px 0;
+    color: #f2e2bf;
+}
+
+.story-text {
+    color: rgba(237,220,188,.6);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* =====================================================
+   PHOTO GALLERY
+   ===================================================== */
+.gallery {
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.photo-card {
+    position: relative;
+    padding: 12px 12px 40px;
+    background: linear-gradient(160deg, #14100c, #0b0908);
+    border: 1px solid rgba(211,171,84,.28);
+    box-shadow: 0 20px 45px rgba(0,0,0,.5);
+    transition: transform .5s ease, box-shadow .5s ease, border-color .5s ease;
+}
+
+.photo-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(214,180,96,.6);
+    box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 35px rgba(191,145,48,.12);
+}
+
+.photo-frame {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #0d0b09;
+    border: 1px solid rgba(211,171,84,.18);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(.92) contrast(1.04);
+    transition: transform .8s ease, filter .8s ease;
+}
+
+.photo-card:hover .photo-frame img {
+    transform: scale(1.07);
+    filter: saturate(1) contrast(1.06);
+}
+
+.photo-caption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-size: 22px;
+    color: #d7b65e;
+}
+
+/* fallback kalau file fotonya belum ada */
+.photo-frame.empty::after {
+    content: attr(data-fallback);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,229,196,.35);
+}
+
+/* =====================================================
+   FINAL
+   ===================================================== */
+.final-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(131,27,43,.2), transparent 50%);
+}
+
+.final-content {
+    max-width: 850px;
+}
+
+.final-small {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 10px;
+    color: #c9a653;
+    margin-bottom: 25px;
+}
+
+.final-title {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(60px, 9vw, 110px);
+    font-weight: 400;
+    color: #e1bb60;
+}
+
+.final-text {
+    max-width: 650px;
+    margin: 30px auto;
+    color: rgba(242,226,194,.62);
+    line-height: 2;
+    font-size: 14px;
+}
+
+.final-heart {
+    margin-top: 50px;
+    font-size: 32px;
+    color: #b32b42;
+    animation: heartPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1); opacity: .7; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(211,171,84,.1);
+    color: rgba(245,229,196,.35);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* =====================================================
+   MUSIC TOGGLE
+   ===================================================== */
+.music-toggle {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(9, 7, 5, .6);
+    border: 1px solid rgba(211, 171, 84, .4);
+    color: #e0c079;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 150;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: border-color .3s ease, color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+
+.music-toggle:hover {
+    border-color: #d7b65e;
+    color: #f6e3ad;
+    box-shadow: 0 0 22px rgba(199, 163, 77, .25);
+    transform: translateY(-2px);
+}
+
+.music-toggle .slash {
+    position: absolute;
+    width: 26px;
+    height: 1.5px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.music-toggle.muted .slash {
+    opacity: .95;
+}
+
+.music-toggle .eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 16px;
+}
+
+.music-toggle .eq span {
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleY(.25);
+    animation: eqBounce 1s ease-in-out infinite;
+}
+
+.music-toggle .eq span:nth-child(1) { animation-delay: 0s; }
+.music-toggle .eq span:nth-child(2) { animation-delay: .2s; }
+.music-toggle .eq span:nth-child(3) { animation-delay: .4s; }
+
+.music-toggle.muted .eq { opacity: .3; }
+.music-toggle.muted .eq span { animation-play-state: paused; }
+
+@keyframes eqBounce {
+    0%, 100% { transform: scaleY(.25); }
+    50% { transform: scaleY(1); }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 700px) {
+    .music-toggle { right: 16px; bottom: 16px; width: 42px; height: 42px; }
+
+    .navbar { padding: 20px; }
+    .nav-links { display: none; }
+    .opening-text { top: 9%; letter-spacing: 3px; }
+    .opening-title { top: 14%; font-size: 38px; }
+    .envelope-label { bottom: -65px; font-size: 8px; }
+    .hero { padding-top: 120px; }
+    .hero h1 { font-size: 60px; }
+    .section { padding: 90px 20px; }
+    
+    .letter-paper { padding: 45px 28px; }
+    .letter-paper::before { inset: 10px; }
+    .letter-greeting { font-size: 38px; }
+    
+    .letter-highlight { font-size: 31px !important; }
+    .timeline::before { left: 8px; }
+    
+    .story-item, .story-item:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        padding-left: 35px;
+        padding-right: 0;
+    }
+    
+    .story-item:nth-child(odd) .story-dot,
+    .story-item:nth-child(even) .story-dot {
+        left: 2px;
+        right: auto;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 60px;
+    }
+
+    .photo-card { padding: 8px 8px 34px; }
+    .photo-caption { font-size: 18px; bottom: 11px; }
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #080706; }
+::-webkit-scrollbar-thumb { background: #8e6b2d; }
+::-webkit-scrollbar-thumb:hover { background: #c4a04a; }
+</style>
+</head>
+
+<body>
+<!-- =====================================================
+     FLOATING PARTICLES
+     ===================================================== -->
+<div class="particles" id="particles"></div>
+
+<!-- =====================================================
+     BACKGROUND MUSIC (musik/Magnolia.mp3)
+     ===================================================== -->
+<audio id="bgmTrack" loop preload="auto"></audio>
+<button class="music-toggle" id="musicToggle" type="button" aria-label="Nyalakan atau matikan musik latar">
+    <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="slash" aria-hidden="true"></span>
+</button>
+
+
+
+<!-- =====================================================
+     OPENING LETTER
+===================================================== -->
+<div id="letterGate">
+    <div class="opening-text">
+        A Little Something From My Heart
+    </div>
+    <div class="opening-title">
+        For
+        <span>Chantika Meikeysa Alfazari</span>
+    </div>
+
+    <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+            <div class="envelope-body"></div>
+            <div class="inner-letter"></div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
+            <div class="envelope-flap"></div>
+            <div class="seal"></div>
+        </div>
+        <div class="envelope-label">
+            Click the envelope to open
+        </div>
+    </div>
+</div>
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+<div id="mainContent">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">C</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#letter">Letter</a>
+            <a href="#story">Our Story</a>
+            <a href="#forever">Forever</a>
+        </div>
+    </nav>
+
+    <!-- =================================================
+         HERO
+    ================================================= -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">Valentine's Day • A Letter For You</div>
+            <h1>
+                Chantika
+                <span>Meikeysa Alfazari</span>
+            </h1>
+            <div class="hero-line"></div>
+            <p class="hero-description">
+                Ada beberapa perasaan yang terlalu indah untuk hanya disimpan di dalam hati.
+                Jadi kali ini, aku ingin menuangkannya menjadi sebuah surat kecil untuk kamu.
+            </p>
+        </div>
+    </section>
+
+    <!-- =================================================
+         LETTER
+    ================================================= -->
+    <section class="section letter-section" id="letter">
+        <div class="section-inner">
+            <div class="section-label">A Letter For You</div>
+            <h2 class="section-title">From My Heart</h2>
+
+            <div class="letter-paper">
+                <div class="letter-content">
+                    <div class="letter-date letter-text">Valentine's Day</div>
+                    <div class="letter-greeting letter-text">Dear Chantika,</div>
+
+                    <p class="letter-text">
+                        Aku mungkin nggak selalu pandai menjelaskan apa yang aku rasakan.
+                        Kadang ada banyak hal yang ingin aku ceritakan, tapi akhirnya hanya tersimpan di dalam kepala.
+                    </p>
+                    <p class="letter-text">
+                        Tapi hari ini aku ingin mencoba mengatakan satu hal yang sederhana:
+                        <strong>kamu sangat berarti buatku.</strong>
+                    </p>
+                    <p class="letter-text">
+                        Terima kasih karena sudah menjadi seseorang yang membuat hari-hariku terasa lebih berwarna.
+                        Terima kasih untuk setiap cerita, tawa, perhatian, dan momen kecil yang mungkin terlihat sederhana, tetapi sebenarnya sangat berarti.
+                    </p>
+                    <p class="letter-highlight letter-text">
+                        "Some people make life beautiful simply by being in it."
+                    </p>
+                    <p class="letter-text">
+                        Aku nggak tahu bagaimana cerita kita akan berjalan ke depannya.
+                        Tapi aku berharap, selama kita masih diberikan kesempatan untuk berjalan bersama, aku bisa terus menghargai kamu, memahami kamu, dan menjadi seseorang yang bisa membuat kamu merasa dihargai.
+                    </p>
+                    <p class="letter-text">
+                        Semoga semua hal baik selalu menemukan jalan menuju kamu.
+                        Dan semoga ketika suatu hari nanti kita melihat kembali semua kenangan yang pernah kita buat, kita bisa tersenyum karena pernah melewati semuanya bersama.
+                    </p>
+                    <p class="letter-text">
+                        Happy Valentine's Day,
+                        <strong>Chantika Meikeysa Alfazari.</strong>
+                        Terima kasih sudah menjadi bagian dari cerita yang begitu berarti buatku.
+                    </p>
+
+                    <div class="signature letter-text">
+                        <div class="signature-small">With all my love,</div>
+                        <div class="signature-name">Yours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================
+         OUR STORY
+    ================================================= -->
+    <section class="section story" id="story">
+        <div class="section-inner">
+            <div class="section-label">Little Memories</div>
+            <h2 class="section-title">Our Little Story</h2>
+
+            <div class="timeline">
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-number">01</div>
+                    <div class="story-title">The Beginning</div>
+                    <div class="story-text">
+                        Semua cerita selalu dimulai dari sesuatu yang sederhana.
+                        Sebuah pertemuan yang singkat di waktu itu menjadi sebuah hal yang sangat berarti bagi ku, atau mungkin hanya sebuah momen kecil yang awalnya nggak kita sadari.
+                    </div>
+                </div>
+
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-number">02</div>
+                    <div class="story-title">Getting Closer</div>
+                    <div class="story-text">
+                        Perlahan kita mulai mengenal satu sama lain.
+                        Dari yang awalnya biasa saja, berubah menjadi seseorang yang kehadirannya mulai terasa penting.
+                    </div>
+                </div>
+
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-number">03</div>
+                    <div class="story-title">Little Moments</div>
+                    <div class="story-text">
+                        Bukan hanya momen besar yang membuat sebuah hubungan berarti.
+                        Kadang justru percakapan kecil, candaan sederhana, dan waktu yang kita habiskan bersama yang paling lama tinggal di ingatan.
+                    </div>
+                </div>
+
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-number">04</div>
+                    <div class="story-title">Today</div>
+                    <div class="story-text">
+                        Hari ini kita sampai di sini.
+                        Dan aku bersyukur karena dari begitu banyak kemungkinan di dunia, ada satu cerita yang mempertemukan aku dengan kamu.
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================================
+                 PHOTO GALLERY
+    ================================================= -->
+            <div class="gallery" id="gallery">
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/1.jpg" alt="Momen pertama kita" loading="lazy" data-fallback="foto/1.jpg">
+                    </div>
+                    <div class="photo-caption">First Moment</div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/2.jpg" alt="Waktu kita bersama" loading="lazy" data-fallback="foto/2.jpg">
+                    </div>
+                    <div class="photo-caption">Us Together</div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/3.jpg" alt="Senyum terbaikmu" loading="lazy" data-fallback="foto/3.jpg">
+                    </div>
+                    <div class="photo-caption">Your Smile</div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/4.jpg" alt="Momen tersayang" loading="lazy" data-fallback="foto/4.jpg">
+                    </div>
+                    <div class="photo-caption">My Favorite</div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/5.jpg" alt="Tersenyum untukku" loading="lazy" data-fallback="foto/5.jpg">
+                    </div>
+                    <div class="photo-caption">Just For You</div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <img src="foto/6.jpg" alt="Kenangan terindah" loading="lazy" data-fallback="foto/6.jpg">
+                    </div>
+                    <div class="photo-caption">Our Memory</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================
+         FINAL
+    ================================================= -->
+    <section class="final-section" id="forever">
+        <div class="final-content">
+            <div class="final-small">One Last Thing</div>
+            <div class="final-title">Forever & Always</div>
+            <p class="final-text">
+                Kalau halaman ini suatu hari nanti sudah menjadi sebuah kenangan, aku harap kenangan itu tetap menjadi sesuatu yang indah.
+                Karena ada satu hal yang akan selalu aku syukuri:
+                <br><br>
+                <strong>Pernah bertemu dengan kamu.</strong>
+            </p>
+<div class="final-heart">♥</div>
+        </div>
+    </section>
+
+    <!-- =================================================
+         FOOTER
+    ================================================= -->
+    <footer>
+        Made with love • For Chantika Meikeysa Alfazari
+    </footer>
+</div>
+
+<script>
+/* =====================================================
+   PARTICLES
+===================================================== */
+const particleContainer = document.getElementById("particles");
+for (let i = 0; i < 45; i++) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration = (Math.random() * 12 + 8) + "s";
+    particle.style.animationDelay = Math.random() * 10 + "s";
+    particle.style.transform = `scale(${Math.random() * .8 + .4})`;
+    particleContainer.appendChild(particle);
+}
+
+/* =====================================================
+   OPEN LETTER
+===================================================== */
+const gate = document.getElementById("letterGate");
+const envelope = document.getElementById("envelope");
+const mainContent = document.getElementById("mainContent");
+const letter = document.getElementById("letter");
+
+let opened = false;
+
+envelope.addEventListener("click", function () {
+    if (opened) return;
+    opened = true;
+
+    // STEP 0: Mulai musik (klik user = izin autoplay dari browser)
+    if (musicOn) playMusic();
+
+    // STEP 1: Open envelope
+    envelope.classList.add("open");
+
+    // STEP 2: Hide opening screen
+    setTimeout(function () {
+        gate.classList.add("hide");
+
+        // STEP 3: Show main website
+        setTimeout(function () {
+            mainContent.classList.add("unlocked");
+
+            // STEP 4: Reveal letter
+            setTimeout(function () {
+                letter.classList.add("visible");
+
+                // STEP 5: Scroll to letter
+                setTimeout(function () {
+                    letter.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }, 800);
+            }, 600);
+        }, 500);
+    }, 1800);
+});
+
+/* =====================================================
+   PHOTO GALLERY
+   ===================================================== */
+const galleryImages = document.querySelectorAll("#gallery img");
+
+galleryImages.forEach(function (img) {
+    img.addEventListener("error", function () {
+        img.style.display = "none";
+        img.parentElement.classList.add("empty");
+    });
+});
+
+/* Munculkan kartu galeri saat terlihat di layar */
+const gallery = document.getElementById("gallery");
+
+if (gallery && "IntersectionObserver" in window) {
+    const galleryCards = gallery.querySelectorAll(".photo-card");
+
+    galleryCards.forEach(function (card, i) {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "opacity .9s ease, transform .9s ease, box-shadow .5s ease, border-color .5s ease";
+        card.style.transitionDelay = (i % 3) * .12 + "s";
+    });
+
+    const galleryObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            galleryObserver.unobserve(entry.target);
+        });
+    }, { threshold: .2 });
+
+    galleryCards.forEach(function (card) {
+        galleryObserver.observe(card);
+    });
+}
+
+/* =====================================================
+   MUSIK LATAR
+   Sumbernya file: musik/Magnolia.mp3
+   Kalau nama filenya diganti, ubah hanya baris MUSIC_FILE
+===================================================== */
+const MUSIC_FILE = "musik/Magnolia.mp3";
+
+const musicButton = document.getElementById("musicToggle");
+const musicTrack = document.getElementById("bgmTrack");
+
+let musicOn = true;
+
+try {
+    musicOn = localStorage.getItem("valentine-music") !== "off";
+} catch (e) {}
+
+musicTrack.src = MUSIC_FILE;
+musicTrack.volume = 0.4;
+musicButton.classList.toggle("muted", !musicOn);
+
+function playMusic() {
+    musicTrack.volume = 0.4;
+
+    const attempt = musicTrack.play();
+
+    if (attempt && typeof attempt.catch === "function") {
+        attempt.catch(function () {});
+    }
+}
+
+function setMusic(on) {
+    musicOn = on;
+    musicButton.classList.toggle("muted", !on);
+
+    try {
+        localStorage.setItem("valentine-music", on ? "on" : "off");
+    } catch (e) {}
+
+    if (on) {
+        playMusic();
+    } else {
+        musicTrack.pause();
+    }
+}
+
+// 1 tap = matikan / nyalakan musik
+musicButton.addEventListener("click", function () {
+    setMusic(!musicOn);
+});
+
+// Kalau file belum siap saat amplop dibuka, putar begitu bisa
+musicTrack.addEventListener("canplay", function () {
+    if (!musicOn || !opened || document.hidden) return;
+    if (musicTrack.paused) playMusic();
+});
+
+// Jeda saat tab disembunyikan, lanjut lagi saat kembali
+document.addEventListener("visibilitychange", function () {
+    if (document.hidden || !opened || !musicOn) return;
+    playMusic();
+});
+</script>
+</body>
+</html>
